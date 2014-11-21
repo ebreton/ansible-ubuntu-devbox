@@ -8,7 +8,7 @@
     - os_packages
 
 - name: Create user account
-  user: "name={{ ubuntu_devbox_user }} home={{ ubuntu_devbox_home_dir }} comment='{{ ubuntu_devbox_comment }}' shell={{ ubuntu_devbox_shell }} groups=sudo append=yes"
+  user: "name={{ ubuntu_devbox_user }} password={{ ubuntu_devbox_passwd }} home={{ ubuntu_devbox_home_dir }} comment='{{ ubuntu_devbox_comment }}' shell={{ ubuntu_devbox_shell }} groups=sudo append=yes"
   tags:
     - user_account
 

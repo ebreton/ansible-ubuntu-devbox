@@ -3,6 +3,8 @@
 
 ubuntu_devbox_user: "bshumate"
 
+ubuntu_devbox_passwd: "$6$PBzg70Q7Wp0X$Qb3ef41pTVqjesE1V44qbAzCwG5Un1GlZFGS2IeODuK85VqzbwMFaMPjHa9dbWM.3SCD6tPDiuhqK9JeGFBzD."
+
 ubuntu_devbox_home_dir: "/home/{{ ubuntu_devbox_user }}"
 
 ubuntu_devbox_comment: "Brian Shumate"
