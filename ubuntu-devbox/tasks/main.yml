@@ -1,0 +1,74 @@
+---
+# tasks/main.yml: Main tasks file for ansible-ubuntu-devbox
+
+- name: Install OS packages
+  apt: "name={{ item }} update_cache=yes"
+  with_items: ubuntu_devbox_os_packages
+  tags:
+    - os_packages
+
+- name: Create user account
+  user: "name={{ ubuntu_devbox_user }} home={{ ubuntu_devbox_home_dir }} comment='{{ ubuntu_devbox_comment }}' shell={{ ubuntu_devbox_shell }} groups=sudo append=yes"
+  tags:
+    - user_account
+
+- name: Create ssh dir
+  file: "path={{ ubuntu_devbox_home_dir }}/.ssh state=directory owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0700"
+
+- name: Install ssh authorized_keys
+  copy: "src=authorized_keys dest={{ ubuntu_devbox_home_dir }}/.ssh/authorized_keys owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0600"
+
+- name: Create source dir
+  file: "path={{ ubuntu_devbox_home_dir }}/src state=directory owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }}"
+
+- name: Fetch dotfiles
+  git: "repo=https://github.com/brianshumate/dotfiles.git dest={{ ubuntu_devbox_dotfiles_dir }} accept_hostkey=yes"
+  tags:
+    - user_environment
+
+- name: Download Go archive
+  get_url: "url={{ ubuntu_devbox_go_urlbase }}/{{ ubuntu_devbox_go_archive }} dest=/tmp/{{ ubuntu_devbox_go_archive }} sha256sum={{ ubuntu_devbox_go_sha256sum }}"
+
+- name: Unpack Go archive
+  unarchive: "src=/tmp/{{ ubuntu_devbox_go_archive }} dest={{ ubuntu_devbox_go_root }} copy=no"
+
+- name: Download hub source
+  git: "repo=https://github.com/github/hub.git dest={{ ubuntu_devbox_src_dir }}/hub accept_hostkey=yes"
+  tags:
+    - source_code
+
+- name: Install hub build script
+  template: "src=install_hub.j2 dest={{ ubuntu_devbox_dotfiles_dir }}/bin/install_hub owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0755"
+
+- name: Install rbenv
+  git: "repo=https://github.com/sstephenson/rbenv.git dest={{ ubuntu_devbox_home_dir }}/.rbenv accept_hostkey=yes"
+  tags:
+    - utilities
+
+- name: Install ruby-build
+  git: "repo=https://github.com/sstephenson/ruby-build.git dest={{ ubuntu_devbox_home_dir }}/.rbenv/plugins/ruby-build accept_hostkey=yes"
+  tags:
+    - utilities
+
+- name: Install custom dotfiles bootstrap
+  template: "src=bootstrap.j2 dest={{ ubuntu_devbox_dotfiles_dir }}/script/bootstrap owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0755"
+
+- name: Install Node Version Manager
+  git: "repo=https://github.com/creationix/nvm.git dest={{ ubuntu_devbox_nvm_dir }} accept_hostkey=yes"
+  tags:
+    - nodejs
+
+- name: Install Node.js
+  shell: "source {{ ubuntu_devbox_nvm_dir }}/nvm.sh && nvm install {{ ubuntu_devbox_node_version }} creates={{ ubuntu_devbox_node_dir }} executable=/bin/bash"
+  tags:
+    - nodejs
+
+- name: Home ownership
+  file: "path={{ ubuntu_devbox_home_dir }} owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} recurse=yes"
+
+- name: Build hub
+  shell: "su {{ ubuntu_devbox_user }} - -c {{ ubuntu_devbox_dotfiles_dir }}/bin/install_hub"
+
+- name: Execute dotfiles bootstrap
+  shell: "su {{ ubuntu_devbox_user }} - -c {{ ubuntu_devbox_dotfiles_dir }}/script/bootstrap >> {{ ubuntu_devbox_home_dir }}/bootstrap.out"
+

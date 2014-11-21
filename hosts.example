@@ -1,0 +1,6 @@
+# File: example_hosts
+# Example ansible-ubuntu-devbox hosts inventory
+#
+
+[servers]
+penelope.brianshumate.com ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa

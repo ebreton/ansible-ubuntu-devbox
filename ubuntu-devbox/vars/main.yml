@@ -1,0 +1,50 @@
+---
+# vars/main.yml: Main variables file for ansible-ubuntu-devbox
+
+ubuntu_devbox_user: "bshumate"
+
+ubuntu_devbox_home_dir: "/home/{{ ubuntu_devbox_user }}"
+
+ubuntu_devbox_comment: "Brian Shumate"
+
+ubuntu_devbox_envpath: "{{ ubuntu_devbox_home_dir}}/.rbenv/shims:{{ ubuntu_devbox_home_dir }}/.rbenv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/utilities/bin:{{ ubuntu_devbox_home_dir }}/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+ubuntu_devbox_git_authorname: "{{ ubuntu_devbox_comment }}"
+
+ubuntu_devbox_git_authoremail: "brian@brianshumate.com"
+
+ubuntu_devbox_dotfiles_dir: "{{ ubuntu_devbox_home_dir }}/.dotfiles"
+
+ubuntu_devbox_src_dir: "{{ ubuntu_devbox_home_dir }}/src"
+
+ubuntu_devbox_nvm_dir: "{{ ubuntu_devbox_home_dir }}/.nvm"
+
+ubuntu_devbox_node_dir: "{{ ubuntu_devbox_nvm_dir }}/v{{ ubuntu_devbox_node_version }}"
+
+ubuntu_devbox_shell: "/usr/bin/zsh"
+
+ubuntu_devbox_os_packages:
+  - build-essential
+  - libtool
+  - autoconf
+  - automake
+  - autoconf-archive
+  - pkg-config
+  - erlang-base
+  - curl
+  - git
+  - screen
+  - vim-nox
+  - zsh
+
+ubuntu_devbox_go_archive: "go1.3.3.linux-amd64.tar.gz"
+
+ubuntu_devbox_go_sha256sum: "41943288fb9fc5bda9f132b0cf67fefb9cb672d7135b4a87de37372376b9612e"
+
+ubuntu_devbox_go_root: "/usr/local/"
+
+ubuntu_devbox_go_urlbase: "https://storage.googleapis.com/golang"
+
+ubuntu_devbox_node_version: "0.10.33"
+
+ubuntu_devbox_ruby_version: "1.9.3-p327"
