@@ -7,6 +7,24 @@
   tags:
     - os_packages
 
+- name: Python: Install pip
+  sudo: True
+  shell: "easy_install pip"
+  tags:
+    - python_packages
+
+- name: Python: Install virtualenv
+  sudo: True
+  pip: name=virtualenv
+  tags:
+    - python_packages
+
+- name: Python: Install virtualenvwrapper
+  sudo: True
+  pip: name=virtualenvwrapper
+  tags:
+    - python_packages
+
 - name: Create user account
   user: "name={{ ubuntu_devbox_user }} password={{ ubuntu_devbox_passwd }} home={{ ubuntu_devbox_home_dir }} comment='{{ ubuntu_devbox_comment }}' shell={{ ubuntu_devbox_shell }} groups=sudo append=yes"
   tags:

@@ -8,3 +8,7 @@
 ## v1.0.1
 
 - Maybe have more example-ish content in hosts.example
+
+## v1.0.2
+
+- Install Python development env bits

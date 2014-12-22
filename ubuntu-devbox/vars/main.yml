@@ -32,6 +32,7 @@ ubuntu_devbox_os_packages:
   - automake
   - autoconf-archive
   - pkg-config
+  - python-setuptools
   - erlang-base
   - curl
   - git
