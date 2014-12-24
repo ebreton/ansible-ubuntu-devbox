@@ -31,6 +31,7 @@ ubuntu_devbox_os_packages:
   - autoconf
   - automake
   - autoconf-archive
+  - gnupg-agent
   - pkg-config
   - python-setuptools
   - erlang-base

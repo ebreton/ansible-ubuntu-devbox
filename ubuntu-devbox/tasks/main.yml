@@ -7,19 +7,19 @@
   tags:
     - os_packages
 
-- name: Python: Install pip
+- name: "Python → Install pip"
   sudo: True
   shell: "easy_install pip"
   tags:
     - python_packages
 
-- name: Python: Install virtualenv
+- name: "Python → Install virtualenv"
   sudo: True
   pip: name=virtualenv
   tags:
     - python_packages
 
-- name: Python: Install virtualenvwrapper
+- name: "Python → Install virtualenvwrapper"
   sudo: True
   pip: name=virtualenvwrapper
   tags:
@@ -80,6 +80,16 @@
   shell: "source {{ ubuntu_devbox_nvm_dir }}/nvm.sh && nvm install {{ ubuntu_devbox_node_version }} creates={{ ubuntu_devbox_node_dir }} executable=/bin/bash"
   tags:
     - nodejs
+
+- name: Download zsh highlighting
+  sudo: False
+  git: "repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest={{ ubuntu_devbox_home_dir }}/zsh-syntax-highlighting accept_hostkey=yes"
+
+- name: "Install vim-powerline"
+  sudo: True
+  pip: "name=git+git://github.com/Lokaltog/powerline extra_args=--user"
+  tags:
+    - python_packages
 
 - name: Home ownership
   file: "path={{ ubuntu_devbox_home_dir }} owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} recurse=yes"
