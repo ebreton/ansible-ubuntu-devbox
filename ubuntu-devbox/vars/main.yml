@@ -34,6 +34,7 @@ ubuntu_devbox_os_packages:
   - gnupg-agent
   - pkg-config
   - python-setuptools
+  - python-virtualenv
   - erlang-base
   - curl
   - git

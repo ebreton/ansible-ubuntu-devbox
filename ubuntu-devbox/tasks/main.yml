@@ -13,9 +13,9 @@
   tags:
     - python_packages
 
-- name: "Python → Install virtualenv"
+- name: "Python → Install pygments"
   sudo: True
-  pip: name=virtualenv
+  shell: "easy_install pygments"
   tags:
     - python_packages
 
