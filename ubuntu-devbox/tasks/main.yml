@@ -87,7 +87,7 @@
 
 - name: "Install vim-powerline"
   sudo: True
-  pip: "name=git+git://github.com/Lokaltog/powerline extra_args=--user"
+  pip: "name=git+git://github.com/Lokaltog/powerline#egg=powerline"
   tags:
     - python_packages
 

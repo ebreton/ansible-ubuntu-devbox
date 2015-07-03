@@ -12,3 +12,7 @@
 ## v1.0.2
 
 - Install Python development env bits
+
+## v1.0.3
+
+- Different Powerline installation approach
