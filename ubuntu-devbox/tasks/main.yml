@@ -7,15 +7,9 @@
   tags:
     - os_packages
 
-- name: "Python → Install pip"
-  sudo: True
-  shell: "easy_install pip"
-  tags:
-    - python_packages
-
 - name: "Python → Install pygments"
   sudo: True
-  shell: "easy_install pygments"
+  pip: "name=pygments"
   tags:
     - python_packages
 
@@ -58,32 +52,8 @@
 - name: Install hub build script
   template: "src=install_hub.j2 dest={{ ubuntu_devbox_dotfiles_dir }}/bin/install_hub owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0755"
 
-- name: Install rbenv
-  git: "repo=https://github.com/sstephenson/rbenv.git dest={{ ubuntu_devbox_home_dir }}/.rbenv accept_hostkey=yes"
-  tags:
-    - utilities
-
-- name: Install ruby-build
-  git: "repo=https://github.com/sstephenson/ruby-build.git dest={{ ubuntu_devbox_home_dir }}/.rbenv/plugins/ruby-build accept_hostkey=yes"
-  tags:
-    - utilities
-
 - name: Install custom dotfiles bootstrap
   template: "src=bootstrap.j2 dest={{ ubuntu_devbox_dotfiles_dir }}/script/bootstrap owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0755"
-
-- name: Install Node Version Manager
-  git: "repo=https://github.com/creationix/nvm.git dest={{ ubuntu_devbox_nvm_dir }} accept_hostkey=yes"
-  tags:
-    - nodejs
-
-- name: Install Node.js
-  shell: "source {{ ubuntu_devbox_nvm_dir }}/nvm.sh && nvm install {{ ubuntu_devbox_node_version }} creates={{ ubuntu_devbox_node_dir }} executable=/bin/bash"
-  tags:
-    - nodejs
-
-- name: Download zsh highlighting
-  sudo: False
-  git: "repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest={{ ubuntu_devbox_home_dir }}/zsh-syntax-highlighting accept_hostkey=yes"
 
 - name: "Install vim-powerline"
   sudo: True

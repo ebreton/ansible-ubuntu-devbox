@@ -1,9 +1,0 @@
-#!/bin/sh
-
-export PATH=/usr/local/go/bin:$PATH
-
-cd {{ ubuntu_devbox_home_dir }}/src/hub
-
-./script/build
-
-cp hub {{ ubuntu_devbox_dotfiles_dir }}/bin/

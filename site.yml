@@ -1,5 +1,5 @@
 ---
-# File: common.yml - ansible-ubuntu-devbox site playbook
+# File: common.yml - site playbook
 
 - hosts: servers
   roles:
