@@ -5,7 +5,7 @@ ubuntu_devbox_user: "emb"
 
 ubuntu_devbox_passwd: ""
 
-ubuntu_devbox_gpg_keyid: "A118B5408A51D9DF"
+ubuntu_devbox_gpg_keyid: "D408B7A1"
 
 ubuntu_devbox_home_dir: "/home/{{ ubuntu_devbox_user }}"
 
