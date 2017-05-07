@@ -1,21 +1,27 @@
 ---
 # tasks/main.yml: Main tasks file for ansible-ubuntu-devbox
 
-- name: Install OS packages
-  apt: "name={{ item }} update_cache=yes"
-  with_items: ubuntu_devbox_os_packages
+- name: Update all packages to the latest version
+  apt:
+    update_cache: yes
+    upgrade: dist
   tags:
     - os_packages
 
-- name: "Python → Install pygments"
-  sudo: True
-  pip: "name=pygments"
+- name: Install OS packages
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+  with_items: "{{ ubuntu_devbox_os_packages }}"
   tags:
-    - python_packages
+    - os_packages
 
-- name: "Python → Install virtualenvwrapper"
-  sudo: True
-  pip: name=virtualenvwrapper
+- name: "Python packages"
+  become: True
+  become_method: sudo
+  pip:
+    name: "{{ item }}"
+  with_items: "{{ ubuntu_devbox_python_packages }}"
   tags:
     - python_packages
 
@@ -26,47 +32,42 @@
 
 - name: Create ssh dir
   file: "path={{ ubuntu_devbox_home_dir }}/.ssh state=directory owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0700"
+  tags:
+    - user_account
 
 - name: Install ssh authorized_keys
   copy: "src=authorized_keys dest={{ ubuntu_devbox_home_dir }}/.ssh/authorized_keys owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0600"
-
-- name: Create source dir
-  file: "path={{ ubuntu_devbox_home_dir }}/src state=directory owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }}"
-
-- name: Fetch dotfiles
-  git: "repo=https://github.com/brianshumate/dotfiles.git dest={{ ubuntu_devbox_dotfiles_dir }} accept_hostkey=yes"
   tags:
-    - user_environment
+    - user_account
 
 - name: Download Go archive
   get_url: "url={{ ubuntu_devbox_go_urlbase }}/{{ ubuntu_devbox_go_archive }} dest=/tmp/{{ ubuntu_devbox_go_archive }} sha256sum={{ ubuntu_devbox_go_sha256sum }}"
+  tags:
+    - go_packages
 
 - name: Unpack Go archive
-  unarchive: "src=/tmp/{{ ubuntu_devbox_go_archive }} dest={{ ubuntu_devbox_go_root }} copy=no"
-
-- name: Download hub source
-  git: "repo=https://github.com/github/hub.git dest={{ ubuntu_devbox_src_dir }}/hub accept_hostkey=yes"
+  unarchive:
+    src: "/tmp/{{ ubuntu_devbox_go_archive }}"
+    dest: "{{ ubuntu_devbox_go_root }}"
+    copy: no
   tags:
-    - source_code
+    - go_packages
 
-- name: Install hub build script
-  template: "src=install_hub.j2 dest={{ ubuntu_devbox_dotfiles_dir }}/bin/install_hub owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0755"
-
-- name: Install custom dotfiles bootstrap
-  template: "src=bootstrap.j2 dest={{ ubuntu_devbox_dotfiles_dir }}/script/bootstrap owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0755"
-
-- name: "Install vim-powerline"
-  sudo: True
-  pip: "name=git+git://github.com/Lokaltog/powerline#egg=powerline"
+- name: Fetch dotfiles
+  git: "repo=https://github.com/ebreton/dotfiles.git dest={{ ubuntu_devbox_dotfiles_dir }} accept_hostkey=yes"
   tags:
-    - python_packages
+    - user_environment
 
 - name: Home ownership
   file: "path={{ ubuntu_devbox_home_dir }} owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} recurse=yes"
-
-- name: Build hub
-  shell: "su {{ ubuntu_devbox_user }} - -c {{ ubuntu_devbox_dotfiles_dir }}/bin/install_hub"
+  tags:
+    - user_account
+    - user_environment
 
 - name: Execute dotfiles bootstrap
-  shell: "su {{ ubuntu_devbox_user }} - -c {{ ubuntu_devbox_dotfiles_dir }}/script/bootstrap >> {{ ubuntu_devbox_home_dir }}/bootstrap.out"
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  shell: "{{ ubuntu_devbox_dotfiles_dir }}/bootstrap.sh --force >> {{ ubuntu_devbox_home_dir }}/bootstrap.out"
+  tags:
+    - user_environment
 

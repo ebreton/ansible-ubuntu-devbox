@@ -3,7 +3,7 @@
 
 ubuntu_devbox_user: "emb"
 
-ubuntu_devbox_passwd: ""
+ubuntu_devbox_passwd: "$6$2RDBLpS9lUvo3Yj1$IEbjm/l2TleXF9ha3omIyFgOHgAqAfwNraInftf7ToKBD6ZSnHtWpFG/Opa7ZN5qmO.3BIPiYSjSbZ.Cmrd39."
 
 ubuntu_devbox_gpg_keyid: "D408B7A1"
 
@@ -11,7 +11,7 @@ ubuntu_devbox_home_dir: "/home/{{ ubuntu_devbox_user }}"
 
 ubuntu_devbox_comment: "ebreton"
 
-ubuntu_devbox_envpath: "{{ ubuntu_devbox_home_dir}}/bin:/usr/local/bin:/usr/local/sbin:/usr/local/utilities/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+ubuntu_devbox_envpath: "{{ ubuntu_devbox_home_dir}}/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 
 ubuntu_devbox_git_authorname: "{{ ubuntu_devbox_comment }}"
 
@@ -21,7 +21,7 @@ ubuntu_devbox_src_dir: "{{ ubuntu_devbox_home_dir }}/git-repos"
 
 ubuntu_devbox_dotfiles_dir: "{{ ubuntu_devbox_src_dir }}/dotfiles"
 
-ubuntu_devbox_shell: "/usr/bin/bash"
+ubuntu_devbox_shell: "/bin/bash"
 
 ubuntu_devbox_os_packages:
   - bash-completion
@@ -38,6 +38,11 @@ ubuntu_devbox_os_packages:
   - ca-certificates
   - logwatch
   - fail2ban
+
+ubuntu_devbox_python_packages:
+  - pygments
+  - virtualenvwrapper
+  - cookiecutter
 
 ubuntu_devbox_go_archive: "go1.8.1.linux-amd64.tar.gz"
 
