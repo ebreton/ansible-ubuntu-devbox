@@ -1,0 +1,9 @@
+[submodule "ansible-consul"]
+	path = ansible-consul
+	url = git@github.com:ebreton/ansible-consul.git
+[submodule "ansible-nomad"]
+	path = ansible-nomad
+	url = git@github.com:ebreton/ansible-nomad.git
+[submodule "dotfiles"]
+	path = dotfiles
+	url = git@github.com:ebreton/dotfiles.git

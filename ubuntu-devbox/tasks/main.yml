@@ -6,6 +6,7 @@
     update_cache: yes
     upgrade: dist
   tags:
+    - update
     - os_packages
 
 - name: Install OS packages
