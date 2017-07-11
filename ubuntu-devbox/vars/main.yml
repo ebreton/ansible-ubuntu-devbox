@@ -24,6 +24,8 @@ ubuntu_devbox_dotfiles_dir: "{{ ubuntu_devbox_src_dir }}/dotfiles"
 ubuntu_devbox_shell: "/bin/bash"
 
 ubuntu_devbox_os_packages:
+  - linux-image-extra-{{ ansible_kernel}}
+  - linux-image-extra-virtual
   - bash-completion
   - python-virtualenv
   - python-pip
@@ -37,6 +39,7 @@ ubuntu_devbox_os_packages:
   - software-properties-common
   - apt-transport-https
   - ca-certificates
+  - docker-ce
   - logwatch
   - fail2ban
 
@@ -44,6 +47,7 @@ ubuntu_devbox_python_packages:
   - pygments
   - virtualenvwrapper
   - cookiecutter
+  - docker-compose
 
 ubuntu_devbox_go_archive: "go1.8.1.linux-amd64.tar.gz"
 
