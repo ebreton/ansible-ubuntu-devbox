@@ -129,23 +129,34 @@
   git:
     repo: ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/my-bash-scripts.git
     accept_hostkey: True
-    ssh_opts: -o ForwardAgent=yes
     dest: "{{ ubuntu_devbox_src_dir }}/my-bash-script"
   tags:
+    - user_environment
+
+- name: Correct ownership on my-bash-script
+  file:
+    path: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
+    owner: "{{ ubuntu_devbox_user }}"
+    group: "{{ ubuntu_devbox_user }}"
+    recurse: yes
+  tags:
+    - user_account
     - user_environment
 
 - name: Link my-bash-script binaries into ~/bin
   become: True
   become_user: "{{ ubuntu_devbox_user }}"
-  shell: "find {{ ubuntu_devbox_src_dir }}/my-bash-scripts/bin -name *.sh -exec ln -s {} \\;"
-  args:
-    chdir: "{{ ubuntu_devbox_home_dir}}/bin"
+  file:
+    src: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts/bin/{{ item }}"
+    dest: "{{ ubuntu_devbox_home_dir }}/bin/{{ item }}"
+    state: link
+  with_items:
+    - backupAL.sh
+    - dumpall.sh
+    - pullall.sh
+    - statall.sh
+    - svnserve.sh
   tags:
     - user_environment
-
-- name: Home ownership
-  file: "path={{ ubuntu_devbox_home_dir }} owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} recurse=yes"
-  tags:
-    - user_account
-    - user_environment
+    - test
 
