@@ -4,7 +4,3 @@
 - hosts: servers
   roles:
     - ubuntu-devbox
-
-- hosts: cluster
-  roles:
-    - ansible-consul
