@@ -62,6 +62,19 @@
     - python_packages
     - docker
 
+- name: Download Go archive
+  get_url: "url={{ ubuntu_devbox_go_urlbase }}/{{ ubuntu_devbox_go_archive }} dest=/tmp/{{ ubuntu_devbox_go_archive }} sha256sum={{ ubuntu_devbox_go_sha256sum }}"
+  tags:
+    - go_packages
+
+- name: Unpack Go archive
+  unarchive:
+    src: "/tmp/{{ ubuntu_devbox_go_archive }}"
+    dest: "{{ ubuntu_devbox_go_root }}"
+    copy: no
+  tags:
+    - go_packages
+
 - name: Create user account
   user: "name={{ ubuntu_devbox_user }} password={{ ubuntu_devbox_passwd }} home={{ ubuntu_devbox_home_dir }} comment='{{ ubuntu_devbox_comment }}' shell={{ ubuntu_devbox_shell }} groups=sudo append=yes"
   tags:
@@ -86,18 +99,15 @@
   tags:
     - user_account
 
-- name: Download Go archive
-  get_url: "url={{ ubuntu_devbox_go_urlbase }}/{{ ubuntu_devbox_go_archive }} dest=/tmp/{{ ubuntu_devbox_go_archive }} sha256sum={{ ubuntu_devbox_go_sha256sum }}"
+- name: Setup .extra in user account
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  template:
+    src: templates/.extra
+    dest: ~/.extra
+    force: yes
   tags:
-    - go_packages
-
-- name: Unpack Go archive
-  unarchive:
-    src: "/tmp/{{ ubuntu_devbox_go_archive }}"
-    dest: "{{ ubuntu_devbox_go_root }}"
-    copy: no
-  tags:
-    - go_packages
+    - user_environment
 
 - name: Fetch dotfiles
   become: True
@@ -125,25 +135,25 @@
   tags:
     - user_environment
 
-- name: Fetch my-bash-script
+- name: Fetch my-bash-scripts
   git:
     repo: ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/my-bash-scripts.git
     accept_hostkey: True
-    dest: "{{ ubuntu_devbox_src_dir }}/my-bash-script"
+    dest: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
   tags:
-    - user_environment
+    - user_scripts
 
-- name: Correct ownership on my-bash-script
-  file:
-    path: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
-    owner: "{{ ubuntu_devbox_user }}"
-    group: "{{ ubuntu_devbox_user }}"
-    recurse: yes
-  tags:
-    - user_account
-    - user_environment
+# - name: Correct ownership on my-bash-scripts
+#   file:
+#     path: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
+#     owner: "{{ ubuntu_devbox_user }}"
+#     group: "{{ ubuntu_devbox_user }}"
+#     recurse: yes
+#   tags:
+#     - user_account
+#     - user_scripts
 
-- name: Link my-bash-script binaries into ~/bin
+- name: Link my-bash-scripts binaries into ~/bin
   become: True
   become_user: "{{ ubuntu_devbox_user }}"
   file:
@@ -157,6 +167,5 @@
     - statall.sh
     - svnserve.sh
   tags:
-    - user_environment
-    - test
+    - user_scripts
 
