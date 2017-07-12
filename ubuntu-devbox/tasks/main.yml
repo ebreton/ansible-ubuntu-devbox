@@ -99,6 +99,25 @@
   tags:
     - user_account
 
+- name: Instal gpg key to sign git commits
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  copy:
+    src: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+    dest: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+    mode: 0600
+  tags:
+    - user_environment
+    - git_conf
+
+- name: Add gpg key
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  shell: "gpg --allow-secret-key-import --import ~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+  tags:
+    - user_environment
+    - git_conf
+
 - name: Setup .extra in user account
   become: True
   become_user: "{{ ubuntu_devbox_user }}"
@@ -124,6 +143,21 @@
   shell: "{{ ubuntu_devbox_dotfiles_dir }}/bootstrap.sh --force >> {{ ubuntu_devbox_home_dir }}/bootstrap.out"
   tags:
     - user_environment
+
+- name: Extend global config for git
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  git_config:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+    scope: global
+  with_items:
+    - { "name": "user.name", "value": "{{ ubuntu_devbox_git_authorname }}" }
+    - { "name": "user.email", "value": "{{ ubuntu_devbox_git_authoremail }}" }
+    - { "name": "user.signingkey", "value": "{{ ubuntu_devbox_gpg_keyid }}" }
+  tags:
+    - user_environment
+    - git_conf
 
 - name: Fetch bash-git
   become: True
@@ -169,3 +203,25 @@
   tags:
     - user_scripts
 
+- name: Create ~/etc dir
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  file:
+    dest: ~/etc
+    state: directory
+    force: yes
+  tags:
+    - nginx_conf
+
+- name: Create Nginx conf file
+  become: True
+  become_user: "{{ ubuntu_devbox_user }}"
+  template:
+    src: templates/{{ item }}
+    dest: ~/etc/{{ item }}
+    force: yes
+  with_items:
+    - 001-no-https.conf
+    - 002-redirects.conf
+  tags:
+    - nginx_conf

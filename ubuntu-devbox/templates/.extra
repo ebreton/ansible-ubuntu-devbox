@@ -1,3 +1,4 @@
+export HOSTNAME="{{ ansible_hostname }}"
 export DOCKING="~/git-repos/my-bash-scripts"
 export BACKUP="$DOCKING/backup"
 export SITES="gymnastique-energetique vadrouilleaucanada chilinousvoici bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
@@ -21,14 +22,11 @@ export GMAIL_APP_PASSWORD='password'
 export FROM_NAME='Manu'
 
 # Git credentials
-GIT_AUTHOR_NAME="{{ ubuntu_devbox_git_authorname }}"
-GIT_AUTHOR_EMAIL="{{ ubuntu_devbox_git_authoremail }}"
-GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
-GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
-git config --global user.name "$GIT_AUTHOR_NAME"
-git config --global user.email "$GIT_AUTHOR_EMAIL"
-git config --global gpg.program gpg2
-git config --global user.signingkey {{ ubuntu_devbox_gpg_keyid }}
+export GPG_TTY=$(tty)
+export GIT_AUTHOR_NAME="{{ ubuntu_devbox_git_authorname }}"
+export GIT_AUTHOR_EMAIL="{{ ubuntu_devbox_git_authoremail }}"
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
 # BACKUP Shortcuts
 export REMOTE="{{ remote_host }}.breton.ch"
