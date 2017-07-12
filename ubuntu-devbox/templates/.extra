@@ -31,7 +31,7 @@ git config --global gpg.program gpg2
 git config --global user.signingkey {{ ubuntu_devbox_gpg_keyid }}
 
 # BACKUP Shortcuts
-export REMOTE="umbre.breton.ch"
+export REMOTE="{{ remote_host }}.breton.ch"
 alias pullbackup="rsync -av --update $REMOTE:$BACKUP $DOCKING"
 alias pushbackup="rsync -av --update $BACKUP $REMOTE:$DOCKING"
 alias syncfrom="rsync -av --update --delete --exclude .git $REMOTE:~/git-repos ~/"
