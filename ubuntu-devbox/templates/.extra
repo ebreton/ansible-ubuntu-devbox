@@ -1,5 +1,5 @@
 export HOSTNAME="{{ ansible_hostname }}"
-export DOCKING="~/git-repos/my-bash-scripts"
+export DOCKING="/home/emb/git-repos/my-bash-scripts"
 export BACKUP="$DOCKING/backup"
 export SITES="gymnastique-energetique vadrouilleaucanada chilinousvoici bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
 export SITES_AL="bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
@@ -13,8 +13,7 @@ export VIBRETON_DOMAIN=$MAIN_DOMAIN
 export VIBRETON_PATH="cv-virginie"
 export JEKYLL_DOMAIN="{{ ansible_hostname }}.meteovoyage.com"
 export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com"
-export KOKEN_DOMAIN=$MAIN_DOMAIN
-export KOKEN_PATH="photos"
+export KOKEN_DOMAIN="photos.breton.ch"
 
 # GMail credentials
 export GMAIL_USERNAME='username'

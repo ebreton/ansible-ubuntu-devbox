@@ -95,7 +95,12 @@
     - user_account
 
 - name: Install ssh authorized_keys
-  copy: "src=authorized_keys dest={{ ubuntu_devbox_home_dir }}/.ssh/authorized_keys owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0600"
+  copy: 
+    src: authorized_keys
+    dest: "{{ ubuntu_devbox_home_dir }}/.ssh/authorized_keys"
+    owner: "{{ ubuntu_devbox_user }}"
+    group: "{{ ubuntu_devbox_user }}"
+    mode: "0600"
   tags:
     - user_account
 
@@ -216,9 +221,9 @@
 - name: Create Nginx conf file
   become: True
   become_user: "{{ ubuntu_devbox_user }}"
-  template:
-    src: templates/{{ item }}
-    dest: ~/etc/{{ item }}
+  copy:
+    src: "{{ item }}"
+    dest: "~/etc/{{ item }}"
     force: yes
   with_items:
     - 001-no-https.conf
