@@ -1,22 +1,22 @@
 export HOSTNAME="{{ ansible_hostname }}"
 export DOCKING="/home/emb/git-repos/my-bash-scripts"
 export BACKUP="$DOCKING/backup"
-export SITES="gymnastique-energetique vadrouilleaucanada chilinousvoici bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
+export SITES="gymnastique-energetique vadrouilleaucanada container-koken chilinousvoici bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
 export SITES_AL="bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
 
 # Site domains
-export MAIN_DOMAIN="{{ ansible_fqdn }}"
+export MAIN_DOMAIN="{{ ansible_hostname }}.breton.ch"
 export PHPMEMCACHEADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_PATH="phpmyadmin"
-export VIBRETON_DOMAIN=$MAIN_DOMAIN
+export VIBRETON_DOMAIN="{{ ansible_hostname }}.breton.ch"
 export VIBRETON_PATH="cv-virginie"
 export JEKYLL_DOMAIN="{{ ansible_hostname }}.meteovoyage.com"
-export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com"
+export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com,photos.ibimus.com,static.ibimus.com,www.ibimus.com"
 export KOKEN_DOMAIN="photos.breton.ch"
 
 # GMail credentials
-export GMAIL_USERNAME='username'
+export GMAIL_USERNAME='manu@ibimus.com'
 export GMAIL_APP_PASSWORD='password'
 export FROM_NAME='Manu'
 
