@@ -1,17 +1,27 @@
 ---
 # tasks/main.yml: Main tasks file for ansible-ubuntu-devbox
 
+- name: Create ~/.gnupg
+  file:
+    path: "{{ ubuntu_devbox_home_dir }}/.gnupg"
+    state: directory
+    mode: 0700
+    force: yes
+  tags:
+    - user_environment
+    - git_conf
+
 - name: Instal gpg key to sign git commits
   copy:
     src: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
-    dest: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+    dest: "{{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
     mode: 0600
   tags:
     - user_environment
     - git_conf
 
 - name: Add gpg key
-  shell: "gpg --allow-secret-key-import --import ~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+  shell: "gpg --import {{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
   tags:
     - user_environment
     - git_conf
@@ -19,7 +29,7 @@
 - name: Setup .extra in user account
   template:
     src: templates/.extra
-    dest: ~/.extra
+    dest: "{{ ubuntu_devbox_home_dir }}/.extra"
     force: yes
   tags:
     - user_environment
@@ -81,7 +91,7 @@
 
 - name: Create ~/etc dir
   file:
-    dest: ~/etc
+    dest: "{{ ubuntu_devbox_home_dir }}/etc"
     state: directory
     force: yes
   tags:
@@ -90,7 +100,7 @@
 - name: Create Nginx conf file
   copy:
     src: "{{ item }}"
-    dest: "~/etc/{{ item }}"
+    dest: "{{ ubuntu_devbox_home_dir }}/etc/{{ item }}"
     force: yes
   with_items:
     - 001-no-https.conf

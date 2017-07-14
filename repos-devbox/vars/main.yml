@@ -3,6 +3,8 @@
 
 ubuntu_devbox_gpg_keyid: "89136AC0D408B7A1"
 
+ubuntu_devbox_user: "emb"
+
 ubuntu_devbox_home_dir: "/home/{{ ubuntu_devbox_user }}"
 
 ubuntu_devbox_src_dir: "{{ ubuntu_devbox_home_dir }}/git-repos"
