@@ -59,7 +59,7 @@
     - user_environment
     - git_conf
 
-- name: Fetch bash-git
+- name: Fetch bash-git-prompt
   git:
     repo: https://github.com/magicmonty/bash-git-prompt.git
     dest: .bash-git-prompt
@@ -67,43 +67,42 @@
   tags:
     - user_environment
 
-- name: Fetch my-bash-scripts
+- name: Fetch helpers git repos
   git:
-    repo: ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/my-bash-scripts.git
+    repo: "ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/{{ item }}.git"
+    dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
     accept_hostkey: True
-    dest: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
+  with_items: "{{ ubuntu_devbox_git_helpers }}"
   tags:
-    - user_scripts
+    - nginx_conf
+    - helpers
+    - update
 
 - name: Link my-bash-scripts binaries into ~/bin
   file:
     src: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts/bin/{{ item }}"
     dest: "{{ ubuntu_devbox_home_dir }}/bin/{{ item }}"
     state: link
-  with_items:
-    - backupAL.sh
-    - dumpall.sh
-    - pullall.sh
-    - statall.sh
-    - svnserve.sh
+  with_items: "{{ ubuntu_devbox_helpers_script }}"
   tags:
-    - user_scripts
+    - helpers
 
-- name: Create ~/etc dir
-  file:
-    dest: "{{ ubuntu_devbox_home_dir }}/etc"
-    state: directory
-    force: yes
-  tags:
-    - nginx_conf
-
-- name: Create Nginx conf file
+- name: Copy nginx conf files
   copy:
     src: "{{ item }}"
-    dest: "{{ ubuntu_devbox_home_dir }}/etc/{{ item }}"
+    dest: "{{ ubuntu_devbox_src_dir }}/container-helpers/etc/{{ item }}"
     force: yes
-  with_items:
-    - 001-no-https.conf
-    - 002-redirects.conf
+  with_items: "{{ ubuntu_devbox_nginx_confs }}"
   tags:
     - nginx_conf
+    - helpers
+
+- name: Fetch sites repos
+  git:
+    repo: "ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/{{ item }}.git"
+    dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
+    accept_hostkey: True
+  with_items: "{{ ubuntu_devbox_git_sites }}"
+  tags:
+    - update
+    - sites
