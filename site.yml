@@ -1,6 +1,10 @@
 ---
 # File: common.yml - site playbook
 
-- hosts: servers
+- hosts: Servers
   roles:
     - ubuntu-devbox
+
+- hosts: Repos
+  roles:
+    - repos-devbox
