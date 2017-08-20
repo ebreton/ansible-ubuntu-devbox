@@ -32,6 +32,7 @@ ubuntu_devbox_os_packages:
   - ca-certificates
   - logwatch
   - fail2ban
+  - unzip
 
 ubuntu_devbox_python_packages:
   - pygments
