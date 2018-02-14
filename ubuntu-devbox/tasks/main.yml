@@ -15,6 +15,7 @@
     name: "{{ item }}"
   with_items: "{{ ubuntu_devbox_os_packages }}"
   tags:
+    - update
     - os_packages
 
 - name: Add Docker gpg key
@@ -109,3 +110,10 @@
     mode: "0600"
   tags:
     - user_account
+
+- name: update all images and all repos
+  command: /home/emb/bin/pullall.sh both *
+  args:
+    chdir: /home/emb/git-repos
+  tags:
+    - update

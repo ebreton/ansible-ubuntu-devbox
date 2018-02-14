@@ -35,8 +35,7 @@ ubuntu_devbox_os_packages:
   - unzip
 
 ubuntu_devbox_python_packages:
-  - pygments
-  - virtualenvwrapper
+  - pipenv
   - cookiecutter
   - docker-compose
 
