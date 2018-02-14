@@ -1,5 +1,4 @@
 # File: hosts - inventory
 [Servers]
 umbre.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-nikita.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
 fool.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
