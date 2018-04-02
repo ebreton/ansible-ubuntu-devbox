@@ -51,16 +51,15 @@
   tags:
     - docker
 
-- name: Update pip
+- name: Upgrade pip
   pip:
     name: pip
     extra_args: --upgrade
   tags:
-    - update
     - python_packages
     - docker
 
-- name: Update python packages
+- name: Pip install packages
   pip:
     name: "{{ item }}"
     state: latest

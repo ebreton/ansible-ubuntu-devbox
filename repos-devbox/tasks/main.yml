@@ -110,7 +110,6 @@
     accept_hostkey: True
   with_items: "{{ ubuntu_devbox_git_sites }}"
   tags:
-    - update
     - sites
 
 - name: update all images and all repos
