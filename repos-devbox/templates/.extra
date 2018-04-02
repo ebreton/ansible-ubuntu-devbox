@@ -1,19 +1,14 @@
 export HOSTNAME="{{ ansible_hostname }}"
-export DOCKING="{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
-export BACKUP="$DOCKING/backup"
-export SITES="gymnastique-energetique vadrouilleaucanada container-koken chilinousvoici bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
-export SITES_AL="bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
+export SITES="{% for site in ubuntu_devbox_wp_sites %}{{site}} {% endfor %}"
 
 # Site domains
 export MAIN_DOMAIN="{{ ansible_hostname }}.breton.ch"
 export PHPMEMCACHEADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_PATH="phpmyadmin"
-export VIBRETON_DOMAIN="{{ ansible_hostname }}.breton.ch"
-export VIBRETON_PATH="cv-virginie"
 export JEKYLL_DOMAIN="{{ ansible_hostname }}.meteovoyage.com"
 export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com,photos.ibimus.com,static.ibimus.com,www.ibimus.com"
-export KOKEN_DOMAIN="photos.breton.ch"
+export KOKEN_DOMAIN="{{ ansible_hostname }}.vibre.ch"
 
 # GMail credentials
 export GMAIL_USERNAME='manu@ibimus.com'
@@ -29,9 +24,8 @@ export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
 # BACKUP Shortcuts
 export REMOTE="{{ remote_host }}.breton.ch"
-alias pullbackup="rsync -av --update $REMOTE:$BACKUP $DOCKING"
-alias pushbackup="rsync -av --update $BACKUP $REMOTE:$DOCKING"
-alias syncfrom="rsync -av --update --delete --exclude .git $REMOTE:{{ ubuntu_devbox_src_dir }} ~/"
+alias pullbackup="rsync -av --exclude=.git --update $REMOTE:{{ ubuntu_devbox_src_dir }}/* {{ ubuntu_devbox_src_dir }}s/"
+alias pushbackup="rsync -av --exclude=.git --update {{ ubuntu_devbox_src_dir }}s/* $REMOTE:{{ ubuntu_devbox_src_dir }}/"
 
 # cleaning, maintenance
 alias purge='find . -name *.pyc -exec rm -f {} \;'

@@ -35,3 +35,16 @@ ubuntu_devbox_git_sites:
   - container-koken
   - container-static-ibimus
   - container-vibreton
+
+ubuntu_devbox_wp_sites:
+  - annelaure-art
+  - atelier-magnolia
+  - bernardginisty
+  - cesaremongodi
+  - chilinousvoici
+  - container-static-ibimus
+  - container-vibre
+  - jenniferetbenjaminsemarient
+  - semencedamour
+  - unandevadrouille
+  - vadrouilleaucanada
