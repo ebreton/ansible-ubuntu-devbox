@@ -1,4 +1,4 @@
 # File: hosts - inventory
 [Repos]
-umbre.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=fool
+#umbre.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=fool
 fool.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=umbre

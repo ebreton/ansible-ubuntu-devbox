@@ -106,3 +106,10 @@
   tags:
     - update
     - sites
+
+- name: update all images and all repos
+  command: /home/emb/bin/pullall.sh both *
+  args:
+    chdir: "{{ ubuntu_devbox_src_dir }}"
+  tags:
+    - update

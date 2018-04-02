@@ -1,5 +1,5 @@
 export HOSTNAME="{{ ansible_hostname }}"
-export DOCKING="/home/emb/git-repos/my-bash-scripts"
+export DOCKING="{{ ubuntu_devbox_src_dir }}/my-bash-scripts"
 export BACKUP="$DOCKING/backup"
 export SITES="gymnastique-energetique vadrouilleaucanada container-koken chilinousvoici bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
 export SITES_AL="bernardginisty cesaremongodi silviainstitut semencedamour atelier-magnolia annelaure-art"
@@ -31,7 +31,7 @@ export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 export REMOTE="{{ remote_host }}.breton.ch"
 alias pullbackup="rsync -av --update $REMOTE:$BACKUP $DOCKING"
 alias pushbackup="rsync -av --update $BACKUP $REMOTE:$DOCKING"
-alias syncfrom="rsync -av --update --delete --exclude .git $REMOTE:~/git-repos ~/"
+alias syncfrom="rsync -av --update --delete --exclude .git $REMOTE:{{ ubuntu_devbox_src_dir }} ~/"
 
 # cleaning, maintenance
 alias purge='find . -name *.pyc -exec rm -f {} \;'

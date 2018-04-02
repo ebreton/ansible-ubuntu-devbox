@@ -1,7 +1,7 @@
 ---
 # tasks/main.yml: Main tasks file for ansible-ubuntu-devbox
 
-- name: Update all packages to the latest version
+- name: Upgrade apt distribution
   apt:
     update_cache: yes
     upgrade: dist
@@ -9,7 +9,7 @@
     - update
     - os_packages
 
-- name: Install OS packages
+- name: Install/update apt packages
   apt:
     update_cache: yes
     name: "{{ item }}"
@@ -18,7 +18,7 @@
     - update
     - os_packages
 
-- name: Add Docker gpg key
+- name: Add Docker apt key
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     id: 0EBFCD88
@@ -35,7 +35,7 @@
     - os_packages
     - docker
 
-- name: Install OS packages
+- name: Install docker-ce
   apt:
     update_cache: yes
     name: "docker-ce"
@@ -60,7 +60,7 @@
     - python_packages
     - docker
 
-- name: Python packages
+- name: Update python packages
   pip:
     name: "{{ item }}"
     state: latest
@@ -68,19 +68,6 @@
   tags:
     - python_packages
     - docker
-
-- name: Download Go archive
-  get_url: "url={{ ubuntu_devbox_go_urlbase }}/{{ ubuntu_devbox_go_archive }} dest=/tmp/{{ ubuntu_devbox_go_archive }} sha256sum={{ ubuntu_devbox_go_sha256sum }}"
-  tags:
-    - go_packages
-
-- name: Unpack Go archive
-  unarchive:
-    src: "/tmp/{{ ubuntu_devbox_go_archive }}"
-    dest: "{{ ubuntu_devbox_go_root }}"
-    copy: no
-  tags:
-    - go_packages
 
 - name: Create user account
   user: "name={{ ubuntu_devbox_user }} password={{ ubuntu_devbox_passwd }} home={{ ubuntu_devbox_home_dir }} comment='{{ ubuntu_devbox_comment }}' shell={{ ubuntu_devbox_shell }} groups=sudo append=yes"
@@ -96,12 +83,12 @@
     - user_account
     - docker
 
-- name: Create ssh dir
+- name: Create user .ssh dir
   file: "path={{ ubuntu_devbox_home_dir }}/.ssh state=directory owner={{ ubuntu_devbox_user }} group={{ ubuntu_devbox_user }} mode=0700"
   tags:
     - user_account
 
-- name: Install ssh authorized_keys
+- name: Install authorized_keys
   copy:
     src: authorized_keys
     dest: "{{ ubuntu_devbox_home_dir }}/.ssh/authorized_keys"
@@ -111,9 +98,21 @@
   tags:
     - user_account
 
-- name: update all images and all repos
-  command: /home/emb/bin/pullall.sh both *
-  args:
-    chdir: /home/emb/git-repos
+- name: Setup backup-manager.conf
+  template:
+    src: templates/backup-manager.conf
+    dest: "/etc/backup-manager.conf"
+    group: "{{ ubuntu_devbox_user }}"
+    mode: 0660
+    force: yes
   tags:
-    - update
+    - backup
+
+- name: Setup backup crontab
+  cron:
+    name: "call backup manager"
+    minute: "8"
+    hour: "19"
+    job: "/usr/sbin/backup-manager > /dev/null"
+  tags:
+    - backup

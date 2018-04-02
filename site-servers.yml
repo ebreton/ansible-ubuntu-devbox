@@ -1,0 +1,6 @@
+---
+# File: common.yml - site playbook
+
+- hosts: Servers
+  roles:
+    - ubuntu-devbox

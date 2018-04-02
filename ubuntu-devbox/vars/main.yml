@@ -7,6 +7,8 @@ ubuntu_devbox_passwd: "$6$2RDBLpS9lUvo3Yj1$IEbjm/l2TleXF9ha3omIyFgOHgAqAfwNraInf
 
 ubuntu_devbox_home_dir: "/home/{{ ubuntu_devbox_user }}"
 
+ubuntu_devbox_src_dir: "{{ ubuntu_devbox_home_dir }}/git-repos"
+
 ubuntu_devbox_comment: "ebreton"
 
 ubuntu_devbox_envpath: "{{ ubuntu_devbox_home_dir}}/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -17,7 +19,6 @@ ubuntu_devbox_os_packages:
   - linux-image-extra-{{ ansible_kernel}}
   - linux-image-extra-virtual
   - bash-completion
-  - python-virtualenv
   - python-pip
   - htop
   - tree
@@ -33,16 +34,22 @@ ubuntu_devbox_os_packages:
   - logwatch
   - fail2ban
   - unzip
+  - backup-manager
 
 ubuntu_devbox_python_packages:
   - pipenv
   - cookiecutter
   - docker-compose
 
-ubuntu_devbox_go_archive: "go1.8.1.linux-amd64.tar.gz"
-
-ubuntu_devbox_go_sha256sum: "a579ab19d5237e263254f1eac5352efcf1d70b9dacadb6d6bb12b0911ede8994"
-
-ubuntu_devbox_go_root: "/usr/local/"
-
-ubuntu_devbox_go_urlbase: "https://storage.googleapis.com/golang"
+ubuntu_devbox_wp_sites:
+  - annelaure-art
+  - atelier-magnolia
+  - bernardginisty
+  - cesaremongodi
+  - chilinousvoici
+  - container-static-ibimus
+  - container-vibre
+  - jenniferetbenjaminsemarient
+  - semencedamour
+  - unandevadrouille
+  - vadrouilleaucanada
