@@ -24,9 +24,6 @@ ubuntu_devbox_git_helpers:
 
 ubuntu_devbox_helpers_script:
   - backupAL.sh
-  - dumpall.sh
-  - pullall.sh
-  - statall.sh
   - svnserve.sh
 
 ubuntu_devbox_nginx_confs:
