@@ -24,7 +24,7 @@ export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
 
 # BACKUP Shortcuts
 export REMOTE="{{ remote_host }}.breton.ch"
-alias pullbackup="rsync -av --exclude=.git --update $REMOTE:{{ ubuntu_devbox_src_dir }}/* {{ ubuntu_devbox_src_dir }}s/"
+alias pullbackup="rsync -av --exclude=.git --update $REMOTE:{{ ubuntu_devbox_src_dir }}/* {{ ubuntu_devbox_src_dir }}/"
 alias pushbackup="rsync -av --exclude=.git --update {{ ubuntu_devbox_src_dir }}/* $REMOTE:{{ ubuntu_devbox_src_dir }}/"
 
 # cleaning, maintenance
