@@ -18,24 +18,24 @@ ubuntu_devbox_shell: "/bin/bash"
 ubuntu_devbox_os_packages:
   - linux-image-extra-{{ ansible_kernel}}
   - linux-image-extra-virtual
+  - apt-transport-https
+  - backup-manager
   - bash-completion
-  - python-pip
-  - htop
-  - tree
-  - sudo
-  - make
+  - ca-certificates
   - curl
+  - fail2ban
   - git
   - gnupg
+  - htop
+  - logwatch
+  - make
+  - mutt
+  - python-pip
   - screen
   - software-properties-common
-  - apt-transport-https
-  - ca-certificates
-  - gnupg-agent 
-  - logwatch
-  - fail2ban
+  - sudo
+  - tree
   - unzip
-  - backup-manager
 
 ubuntu_devbox_python_packages:
   - pipenv
