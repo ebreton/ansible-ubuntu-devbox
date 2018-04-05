@@ -32,9 +32,9 @@ ubuntu_devbox_nginx_confs:
 
 ubuntu_devbox_git_sites:
   - container-jekyll-meteovoyage
-  - container-koken
   - container-static-ibimus
-  - container-vibreton
+  # - container-koken
+  # - container-vibreton
 
 ubuntu_devbox_wp_sites:
   - annelaure-art

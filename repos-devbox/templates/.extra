@@ -8,7 +8,7 @@ export PHPMYADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_PATH="phpmyadmin"
 export JEKYLL_DOMAIN="{{ ansible_hostname }}.meteovoyage.com"
 export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com,photos.ibimus.com,static.ibimus.com,www.ibimus.com"
-export KOKEN_DOMAIN="{{ ansible_hostname }}.vibre.ch"
+export VIBRE_DOMAIN="{{ ansible_hostname }}.vibre.ch"
 
 # GMail credentials
 export GMAIL_USERNAME='manu@ibimus.com'
