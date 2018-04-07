@@ -20,6 +20,7 @@ ubuntu_devbox_git_authoremail: "manu@ibimus.com"
 ubuntu_devbox_git_helpers:
   - my-bash-scripts
   - container-helpers
+  - container-monitoring
   - cookiecutter-container-wp
 
 ubuntu_devbox_helpers_script:
