@@ -1,5 +1,4 @@
 export HOSTNAME="{{ ansible_hostname }}"
-export SITES="{% for site in ubuntu_devbox_wp_sites %}{{site}} {% endfor %}"
 
 # Site domains
 export MAIN_DOMAIN="{{ ansible_hostname }}.breton.ch"
