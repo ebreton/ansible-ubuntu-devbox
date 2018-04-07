@@ -29,6 +29,6 @@ alias pullbackup="rsync -av --exclude=.git --update $REMOTE:{{ ubuntu_devbox_src
 alias pushbackup="rsync -av --exclude=.git --update {{ ubuntu_devbox_src_dir }}/* $REMOTE:{{ ubuntu_devbox_src_dir }}/"
 
 # cleaning, maintenance
-alias purge='find . -name *.pyc -exec rm -f {} \;'
+alias purge='find . -name *.pyc -exec rm -f {} \; && find . -name *~ -exec rm -f {} \;'
 alias upup='sudo apt-get update && sudo apt-get upgrade'
 alias chall='sudo chown -R emb:www-data . && sudo chmod -R g+w . && sudo find . -type d -exec chmod g+s {} \;'
