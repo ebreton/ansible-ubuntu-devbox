@@ -1,6 +1,7 @@
 export HOSTNAME="{{ ansible_hostname }}"
 
 # Site domains
+export DEFAULT_PROTOCOL="{{ ubuntu_devbox_default_protocol }}"
 export MAIN_DOMAIN="{{ ansible_hostname }}.breton.ch"
 export MONITORING_DOMAIN=$MAIN_DOMAIN
 export PHPMEMCACHEADMIN_DOMAIN=$MAIN_DOMAIN

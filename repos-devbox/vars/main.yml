@@ -36,3 +36,5 @@ ubuntu_devbox_git_sites:
   - container-static-ibimus
   # - container-koken
   # - container-vibreton
+
+ubuntu_devbox_default_protocol: "https"
