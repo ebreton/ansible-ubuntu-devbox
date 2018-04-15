@@ -7,9 +7,9 @@ export MONITORING_DOMAIN=$MAIN_DOMAIN
 export PHPMEMCACHEADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_DOMAIN=$MAIN_DOMAIN
 export PHPMYADMIN_PATH="phpmyadmin"
-export JEKYLL_DOMAIN="{{ ansible_hostname }}.meteovoyage.com"
-export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com,photos.ibimus.com,static.ibimus.com,www.ibimus.com"
-export VIBRE_DOMAIN="{{ ansible_hostname }}.vibre.ch"
+export JEKYLL_DOMAIN="{{ ansible_hostname }}.meteovoyage.com,www.meteovoyage.com"
+export IBIMUS_DOMAIN="{{ ansible_hostname }}.ibimus.com,photos.ibimus.com,static.ibimus.com,www.ibimus.com,ibimus.com"
+export VIBRE_DOMAIN="{{ ansible_hostname }}.vibre.ch,www.vibre.ch,vibre.ch"
 
 # GMail credentials
 export GMAIL_USERNAME='manu@ibimus.com'

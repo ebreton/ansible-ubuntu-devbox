@@ -116,5 +116,6 @@
   command: /home/emb/bin/pullall.sh both *
   args:
     chdir: "{{ ubuntu_devbox_src_dir }}"
-  tags:
-    - update
+  # tags:
+  #   update freezes when run with tag update....
+  #   - update
