@@ -11,31 +11,30 @@
     - user_environment
     - git_conf
 
-- name: Instal gpg key to sign git commits
-  copy:
-    src: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
-    dest: "{{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
-    mode: 0600
-  tags:
-    - user_environment
-    - git_conf
+# - name: Instal gpg key to sign git commits
+#   copy:
+#     src: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+#     dest: "{{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+#     mode: 0600
+#   tags:
+#     - user_environment
+#     - git_conf
 
 # this command raises an error when key already imported -> ignore it
 # gpg: key xxx: already in secret keyring
 # gpg: Total number processed: 1
 # gpg:       secret keys read: 1
 # gpg:  secret keys unchanged: 1
-- name: Add gpg key
-  shell: "gpg --import {{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key || true"
-  tags:
-    - user_environment
-    - git_conf
+# - name: Add gpg key
+#   shell: "gpg --import {{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key || true"
+#   tags:
+#     - user_environment
+#     - git_conf
 
 - name: Fetch dotfiles
   git:
-    repo: git@github.com:ebreton/dotfiles.git
+    repo: https://github.com/ebreton/dotfiles.git
     dest: "{{ ubuntu_devbox_dotfiles_dir }}"
-    accept_hostkey: True
   tags:
     - user_environment
 
@@ -75,7 +74,7 @@
 
 - name: Fetch helpers git repos
   git:
-    repo: "ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/{{ item }}.git"
+    repo: "https://github.com/ebreton/{{ item }}.git"
     dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
     accept_hostkey: True
   with_items: "{{ ubuntu_devbox_git_helpers }}"
@@ -83,39 +82,3 @@
     - nginx_conf
     - helpers
     - update
-
-- name: Link my-bash-scripts binaries into ~/bin
-  file:
-    src: "{{ ubuntu_devbox_src_dir }}/my-bash-scripts/bin/{{ item }}"
-    dest: "{{ ubuntu_devbox_home_dir }}/bin/{{ item }}"
-    state: link
-  with_items: "{{ ubuntu_devbox_helpers_script }}"
-  tags:
-    - helpers
-
-- name: Copy nginx conf files
-  copy:
-    src: "{{ item }}"
-    dest: "{{ ubuntu_devbox_src_dir }}/container-helpers/etc/{{ item }}"
-    force: yes
-  with_items: "{{ ubuntu_devbox_nginx_confs }}"
-  tags:
-    - nginx_conf
-    - helpers
-
-- name: Fetch sites repos
-  git:
-    repo: "ssh://emmanuelbreton@bitbucket.org/emmanuelbreton/{{ item }}.git"
-    dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
-    accept_hostkey: True
-  with_items: "{{ ubuntu_devbox_git_sites }}"
-  tags:
-    - sites
-
-- name: update all images and all repos
-  command: /home/emb/bin/pullall.sh both *
-  args:
-    chdir: "{{ ubuntu_devbox_src_dir }}"
-  # tags:
-  #   update freezes when run with tag update....
-  #   - update

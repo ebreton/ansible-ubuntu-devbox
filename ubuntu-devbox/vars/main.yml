@@ -16,7 +16,7 @@ ubuntu_devbox_envpath: "{{ ubuntu_devbox_home_dir}}/bin:/usr/local/go/bin:/usr/l
 ubuntu_devbox_shell: "/bin/bash"
 
 ubuntu_devbox_os_packages:
-  - linux-image-extra-{{ ansible_kernel}}
+  # - linux-image-extra-{{ ansible_kernel}}
   - linux-image-extra-virtual
   - apt-transport-https
   - backup-manager
@@ -50,7 +50,6 @@ ubuntu_devbox_wp_sites:
   - chilinousvoici
   - container-static-ibimus
   - container-vibre
-  - jenniferetbenjaminsemarient
   - semencedamour
   - unandevadrouille
   - vadrouilleaucanada

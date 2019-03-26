@@ -12,8 +12,7 @@
 - name: Install/update apt packages
   apt:
     update_cache: yes
-    name: "{{ item }}"
-  with_items: "{{ ubuntu_devbox_os_packages }}"
+    name: "{{ ubuntu_devbox_os_packages }}"
   tags:
     - update
     - os_packages
@@ -56,14 +55,14 @@
     name: pip
     extra_args: --upgrade
   tags:
+    - update
     - python_packages
     - docker
 
 - name: Pip install packages
   pip:
-    name: "{{ item }}"
+    name: "{{ ubuntu_devbox_python_packages }}"
     state: latest
-  with_items: "{{ ubuntu_devbox_python_packages }}"
   tags:
     - python_packages
     - docker

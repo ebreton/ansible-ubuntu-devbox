@@ -18,23 +18,11 @@ ubuntu_devbox_git_authorname: "{{ ubuntu_devbox_comment }}"
 ubuntu_devbox_git_authoremail: "manu@ibimus.com"
 
 ubuntu_devbox_git_helpers:
-  - my-bash-scripts
-  - container-helpers
-  - container-monitoring
-  - cookiecutter-container-wp
-
-ubuntu_devbox_helpers_script:
-  - backupAL.sh
-  - svnserve.sh
+  - prod-stack
+  - release-maker
 
 ubuntu_devbox_nginx_confs:
   - 001-no-https.conf
   - 002-redirects.conf
-
-ubuntu_devbox_git_sites:
-  - container-jekyll-meteovoyage
-  - container-static-ibimus
-  # - container-koken
-  # - container-vibreton
 
 ubuntu_devbox_default_protocol: "https"
