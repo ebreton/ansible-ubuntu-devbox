@@ -41,6 +41,7 @@ ubuntu_devbox_python_packages:
   - pipenv
   - cookiecutter
   - docker-compose
+  - docker-auto-labels
 
 ubuntu_devbox_wp_sites:
   - annelaure-art
