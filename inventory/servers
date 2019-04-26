@@ -5,3 +5,4 @@ po.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
 harold.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
 prod.cortexia.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
 qa.cortexia.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+krokmou.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa

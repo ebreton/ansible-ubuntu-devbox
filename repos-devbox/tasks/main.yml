@@ -11,25 +11,25 @@
     - user_environment
     - git_conf
 
-# - name: Instal gpg key to sign git commits
-#   copy:
-#     src: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
-#     dest: "{{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
-#     mode: 0600
-#   tags:
-#     - user_environment
-#     - git_conf
+- name: Instal gpg key to sign git commits
+  copy:
+    src: "~/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+    dest: "{{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
+    mode: 0600
+  tags:
+    - user_environment
+    - git_conf
 
 # this command raises an error when key already imported -> ignore it
 # gpg: key xxx: already in secret keyring
 # gpg: Total number processed: 1
 # gpg:       secret keys read: 1
 # gpg:  secret keys unchanged: 1
-# - name: Add gpg key
-#   shell: "gpg --import {{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key || true"
-#   tags:
-#     - user_environment
-#     - git_conf
+- name: Add gpg key
+  shell: "gpg --import {{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key || true"
+  tags:
+    - user_environment
+    - git_conf
 
 - name: Fetch dotfiles
   git:

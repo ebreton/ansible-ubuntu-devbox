@@ -1,5 +1,8 @@
 # File: hosts - inventory
 [Repos]
-shifu.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=po
-po.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=shifu
-harold.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=shifu
+#shifu.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=po
+#po.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=shifu
+#harold.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=shifu
+#prod.cortexia.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
+#qa.cortexia.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=prod
+krokmou.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa

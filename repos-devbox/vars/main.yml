@@ -18,7 +18,6 @@ ubuntu_devbox_git_authorname: "{{ ubuntu_devbox_comment }}"
 ubuntu_devbox_git_authoremail: "manu@ibimus.com"
 
 ubuntu_devbox_git_helpers:
-  - prod-stack
   - release-maker
 
 ubuntu_devbox_nginx_confs:
