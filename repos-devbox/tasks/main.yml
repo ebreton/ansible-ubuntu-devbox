@@ -8,7 +8,6 @@
     mode: 0700
     force: yes
   tags:
-    - user_environment
     - git_conf
 
 - name: Instal gpg key to sign git commits
@@ -17,7 +16,6 @@
     dest: "{{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key"
     mode: 0600
   tags:
-    - user_environment
     - git_conf
 
 # this command raises an error when key already imported -> ignore it
@@ -28,7 +26,6 @@
 - name: Add gpg key
   shell: "gpg --import {{ ubuntu_devbox_home_dir }}/.gnupg/{{ ubuntu_devbox_gpg_keyid }}.key || true"
   tags:
-    - user_environment
     - git_conf
 
 - name: Fetch dotfiles
@@ -61,7 +58,6 @@
     - { "name": "user.email", "value": "{{ ubuntu_devbox_git_authoremail }}" }
     - { "name": "user.signingkey", "value": "{{ ubuntu_devbox_gpg_keyid }}" }
   tags:
-    - user_environment
     - git_conf
 
 - name: Fetch bash-git-prompt
@@ -72,13 +68,25 @@
   tags:
     - user_environment
 
-- name: Fetch helpers git repos
+- name: Fetch helpers github repos
   git:
     repo: "https://github.com/ebreton/{{ item }}.git"
     dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
     accept_hostkey: True
   with_items: "{{ ubuntu_devbox_git_helpers }}"
   tags:
-    - nginx_conf
-    - helpers
+    - user_environment
+    - git_repos
+    - update
+
+
+- name: Fetch helpers bitbucket repos
+  git:
+    repo: "git@bitbucket.org:cortexiacci/{{ item }}.git"
+    dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
+    accept_hostkey: True
+  with_items: "{{ ubuntu_devbox_bitbucket_repos }}"
+  tags:
+    - user_environment
+    - git_repos
     - update

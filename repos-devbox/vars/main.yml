@@ -20,6 +20,11 @@ ubuntu_devbox_git_authoremail: "manu@ibimus.com"
 ubuntu_devbox_git_helpers:
   - release-maker
 
+ubuntu_devbox_bitbucket_repos:
+  - cluster-stacks
+  - backend
+  - report-maker
+
 ubuntu_devbox_nginx_confs:
   - 001-no-https.conf
   - 002-redirects.conf
