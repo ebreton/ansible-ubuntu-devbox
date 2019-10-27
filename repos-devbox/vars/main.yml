@@ -17,13 +17,16 @@ ubuntu_devbox_git_authorname: "{{ ubuntu_devbox_comment }}"
 
 ubuntu_devbox_git_authoremail: "manu@ibimus.com"
 
-ubuntu_devbox_git_helpers:
-  - release-maker
+ubuntu_cortexia_github_repos:
+  - PostDock
+  - VoTT
+  - dockerswarm.rocks
 
-ubuntu_devbox_bitbucket_repos:
+ubuntu_cortexia_bitbucket_repos:
   - cluster-stacks
   - backend
-  - report-maker
+  - php-backend
+  - js-frontend
 
 ubuntu_devbox_nginx_confs:
   - 001-no-https.conf

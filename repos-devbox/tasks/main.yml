@@ -70,10 +70,10 @@
 
 - name: Fetch helpers github repos
   git:
-    repo: "https://github.com/ebreton/{{ item }}.git"
+    repo: "https://github.com/Cortexia-CH/{{ item }}.git"
     dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
     accept_hostkey: True
-  with_items: "{{ ubuntu_devbox_git_helpers }}"
+  with_items: "{{ ubuntu_cortexia_github_repos }}"
   tags:
     - user_environment
     - git_repos
@@ -85,7 +85,7 @@
     repo: "git@bitbucket.org:cortexiacci/{{ item }}.git"
     dest: "{{ ubuntu_devbox_src_dir }}/{{ item }}"
     accept_hostkey: True
-  with_items: "{{ ubuntu_devbox_bitbucket_repos }}"
+  with_items: "{{ ubuntu_cortexia_bitbucket_repos }}"
   tags:
     - user_environment
     - git_repos
