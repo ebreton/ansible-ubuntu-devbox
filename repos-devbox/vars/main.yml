@@ -18,13 +18,16 @@ ubuntu_devbox_git_authorname: "{{ ubuntu_devbox_comment }}"
 ubuntu_devbox_git_authoremail: "manu@ibimus.com"
 
 ubuntu_cortexia_github_repos:
-  - PostDock
-  - VoTT
   - dockerswarm.rocks
+  - swarmprom
+  - VoTT
+  - image-tagging-docs
 
 ubuntu_cortexia_bitbucket_repos:
-  - cluster-stacks
   - backend
+  - monitoring-app
+  - audit-app
+  - report-maker
   - php-backend
   - js-frontend
 
