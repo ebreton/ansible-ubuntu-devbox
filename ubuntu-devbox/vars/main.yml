@@ -30,7 +30,7 @@ ubuntu_devbox_os_packages:
   - logwatch
   - make
   - mutt
-  - python-pip
+  - python3-pip
   - screen
   - software-properties-common
   - sudo

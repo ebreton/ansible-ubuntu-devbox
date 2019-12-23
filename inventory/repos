@@ -1,12 +1,9 @@
 # File: hosts - inventory
 [Repos]
-po.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=shifu
-shifu.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=shifu
-qa.cortexia.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=prod
-prod.cortexia.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
-harold.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
-krokmou.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
-kognedur.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
-kranedur.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
-stoick.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
-gueulfor.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/id_rsa remote_host=qa
+harold.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=qa
+prod.cortexia.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=qa
+stoick.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=qa
+valka.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=prod
+gueulfor.cortexia.io ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=qa
+po.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=shifu
+shifu.breton.ch ansible_ssh_user=emb ansible_ssh_private_key_file=~/.ssh/perso_rsa remote_host=shifu

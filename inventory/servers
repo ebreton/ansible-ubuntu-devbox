@@ -1,12 +1,9 @@
 # File: hosts - inventory
 [Servers]
-po.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-shifu.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-prod.cortexia.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-qa.cortexia.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-harold.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-krokmou.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-kognedur.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-kranedur.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-stoick.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
-gueulfor.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+harold.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
+prod.cortexia.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
+stoick.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
+valka.cortexia.io ansible_python_interpreter=/usr/bin/python3 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
+gueulfor.cortexia.io ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
+po.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
+shifu.breton.ch ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/perso_rsa
