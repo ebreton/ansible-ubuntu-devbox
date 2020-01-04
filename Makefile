@@ -20,7 +20,7 @@ else
 endif
 
 docker:
-	ansible-playbook -i inventory/servers site-servers.yml -t update
+	ansible-playbook -i inventory/servers site-servers.yml -t docker
 
 update:
 	ansible-playbook -i inventory/servers site-servers.yml -t update
