@@ -77,7 +77,6 @@
   tags:
     - user_environment
     - git_repos
-    - update
 
 
 - name: Fetch helpers bitbucket repos
@@ -89,4 +88,3 @@
   tags:
     - user_environment
     - git_repos
-    - update
